@@ -1,11 +1,12 @@
-import { randomBytes, createHash } from "crypto";
+import { randomBytes } from "crypto";
+import { ethers } from "ethers";
 
 export function createCommit(txData) {
-  const salt = randomBytes(16).toString("hex");
+  const salt = ethers.hexlify(randomBytes(32));
 
-  const hash = createHash("sha256")
-    .update(JSON.stringify(txData) + salt)
-    .digest("hex");
+  const hash = ethers.keccak256(
+    ethers.toUtf8Bytes(JSON.stringify(txData) + salt),
+  );
 
   return { hash, salt };
 }
