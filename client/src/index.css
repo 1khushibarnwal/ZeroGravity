@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-ink text-parchment font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-brass/30 text-parchment;
+  }
+
+  input,
+  textarea {
+    @apply bg-transparent outline-none;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid #e8b34c;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .field {
+    @apply w-full border-b border-ink-line bg-transparent py-2 text-parchment placeholder:text-parchment-faint focus:border-brass transition-colors;
+  }
+
+  .label {
+    @apply text-sm text-parchment-dim mb-1 block;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-brass px-5 py-2.5 font-medium text-ink hover:bg-brass-dim disabled:opacity-40 disabled:cursor-not-allowed transition-colors;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-ink-line px-5 py-2.5 font-medium text-parchment hover:border-veil-bright hover:text-veil-bright disabled:opacity-40 disabled:cursor-not-allowed transition-colors;
+  }
+
+  .hash {
+    @apply font-mono text-sm text-veil-bright break-all;
+  }
+}
+
+@layer utilities {
+  .veil-pulse {
+    animation: veil-pulse 2.4s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .veil-pulse {
+      animation: none;
+    }
+  }
+}
+
+@keyframes veil-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 0 rgba(232, 179, 76, 0));
+  }
+  50% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 6px rgba(232, 179, 76, 0.55));
+  }
+}
